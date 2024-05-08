@@ -5,6 +5,7 @@ import CSInput from "../../../components/form/CSInput";
 import CSSelect from "../../../components/form/CSSelect";
 import {
   brandsOptions,
+  colorOptions,
   frameMaterialOptions,
   frameShapesOptions,
   frameSizeOptions,
@@ -24,10 +25,10 @@ import verifyToken from "../../../utils/verifyToken";
 const AddEyeglass = () => {
   const [addEyeglass] = useAddEyeglassMutation();
   const token = useAppSelector(useCurrentToken);
-  console.log(token);
+  // console.log(token);
   
 
-  // const user = verifyToken(token as string) as TAuthUser;
+  const user = verifyToken(token as string) as TAuthUser;
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
@@ -44,7 +45,7 @@ const AddEyeglass = () => {
       .then((res) => res.json())
       .then((imgbbData) => {
         if (imgbbData.success) {
-          // console.log(imgbbData);
+          console.log(imgbbData);
 
           // data.img = imgbbData.data.display_url;
           // console.log(data);
@@ -54,7 +55,7 @@ const AddEyeglass = () => {
             price: Number(data.price),
             quantity: Number(data.quantity),
             img: imgbbData.data.display_url,
-            // addedBy: user.userId,
+            addedBy: user.userId,
           };
 
           const response = addEyeglass(eyeglassData);
@@ -115,6 +116,9 @@ const AddEyeglass = () => {
             </Col>
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
               <CSSelect label="Brand" name="brand" options={brandsOptions} />
+            </Col>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+              <CSSelect label="Color" name="color" options={colorOptions} />
             </Col>
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
               <CSSelect label="Gender" name="gender" options={genderOptions} />

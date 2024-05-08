@@ -22,6 +22,7 @@ const CSSelect = ({ label, name, options, disabled, mode }: CSSelectType) => {
       render={({ field, fieldState: { error } }) => (
         <Form.Item label={label}>
           <Select
+          size="large"
             mode={mode}
             disabled={disabled}
             style={{ width: "100%" }}

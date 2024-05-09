@@ -13,9 +13,10 @@ type CSSelectType = {
     | undefined;
   disabled?: boolean;
   mode?: "multiple" | undefined;
+  defaultValue?: string;
 };
 
-const CSSelect = ({ label, name, options, disabled, mode }: CSSelectType) => {
+const CSSelect = ({ label, name, options, disabled, mode, defaultValue }: CSSelectType) => {
   return (
     <Controller
       name={name}
@@ -28,6 +29,7 @@ const CSSelect = ({ label, name, options, disabled, mode }: CSSelectType) => {
             style={{ width: "100%" }}
             {...field}
             options={options}
+            defaultValue={defaultValue}
           />
           {error && <small style={{ color: "red" }}>{error.message}</small>}
         </Form.Item>

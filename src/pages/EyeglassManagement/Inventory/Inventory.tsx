@@ -22,10 +22,13 @@ import {
 import { useState } from "react";
 import { TQueryParams } from "../../../types/global.type";
 import { MoreOutlined } from "@ant-design/icons";
+import EditEyeglassModal from "../../../components/ui/Modals/EditEyeglassModal";
 
 const Inventory = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [eyeglassId, setEyeglassId] = useState("");
   const { data: eyeglassData, isFetching } = useGetAllEyeglassesQuery(params);
 
   const items: MenuProps["items"] = [
@@ -42,17 +45,23 @@ const Inventory = () => {
       key: "duplicate_edit",
     },
   ];
-  const handleMoreDropdown :  MenuProps['onClick'] = (data) => {
+  const handleMoreDropdown: MenuProps["onClick"] = (data) => {
     console.log(data.key);
-    
+    if (data.key === "edit") {
+      setIsModalOpen(true);
+    }
   };
+
+  //for modal close
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
 
   const menuProps = {
     items,
     onClick: handleMoreDropdown,
   };
-
-
 
   const columns: TableColumnsType<TEyeglass> = [
     {
@@ -124,10 +133,11 @@ const Inventory = () => {
     },
     {
       title: "Action",
-      render: () => (
+      render: (item) => (
         <Dropdown menu={menuProps} placement="bottom" trigger={["click"]} arrow>
-          <Button size="small">
+          <Button onClick={() => setEyeglassId(item.key)} size="small">
             <MoreOutlined />
+            <EditEyeglassModal eyeglass={item} isModalOpen={isModalOpen} handleCancel={handleCancel} />
           </Button>
         </Dropdown>
       ),

@@ -5,16 +5,17 @@ type TInputProps = {
   type: string;
   name: string;
   label?: string;
+  defaultValue?: string;
 };
 
-const CSInput = ({ type, name, label }: TInputProps) => {
+const CSInput = ({ type, name, label, defaultValue }: TInputProps) => {
   return (
     <div style={{ marginBottom: "20px" }}>
       <Controller
         name={name}
         render={({ field }) => (
           <Form.Item label={label}>
-            <Input {...field} type={type} id={name} size="large" />
+            <Input {...field} type={type} id={name} size="large" defaultValue={defaultValue} />
           </Form.Item>
         )}
       />

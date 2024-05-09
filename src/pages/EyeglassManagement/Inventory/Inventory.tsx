@@ -1,4 +1,12 @@
-import { Button, Image, Table, TableColumnsType, TableProps } from "antd";
+import {
+  Button,
+  Dropdown,
+  Image,
+  MenuProps,
+  Table,
+  TableColumnsType,
+  TableProps,
+} from "antd";
 import { useGetAllEyeglassesQuery } from "../../../redux/features/eyeGlass/eyeglassApi";
 import { TEyeglass } from "../../../types";
 import {
@@ -13,11 +21,38 @@ import {
 } from "../../../constants/eyeglass";
 import { useState } from "react";
 import { TQueryParams } from "../../../types/global.type";
+import { MoreOutlined } from "@ant-design/icons";
 
 const Inventory = () => {
   const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const { data: eyeglassData, isFetching } = useGetAllEyeglassesQuery(params);
+
+  const items: MenuProps["items"] = [
+    {
+      label: "Edit",
+      key: "edit",
+    },
+    {
+      label: "Delete",
+      key: "delete",
+    },
+    {
+      label: "Duplicate & Edit",
+      key: "duplicate_edit",
+    },
+  ];
+  const handleMoreDropdown :  MenuProps['onClick'] = (data) => {
+    console.log(data.key);
+    
+  };
+
+  const menuProps = {
+    items,
+    onClick: handleMoreDropdown,
+  };
+
+
 
   const columns: TableColumnsType<TEyeglass> = [
     {
@@ -41,11 +76,11 @@ const Inventory = () => {
       title: "Price",
       dataIndex: "price",
       filters: [
-        {text: '1-100', value: '1-100'},
-        {text: '101-500', value: '101-500'},
-        {text: '501-1000', value: '501-1000'},
-        {text: '1001-5000', value: '1001-5000'},
-      ]
+        { text: "1-100", value: "1-100" },
+        { text: "101-500", value: "101-500" },
+        { text: "501-1000", value: "501-1000" },
+        { text: "1001-5000", value: "1001-5000" },
+      ],
     },
     {
       title: "Frame Material",
@@ -89,7 +124,13 @@ const Inventory = () => {
     },
     {
       title: "Action",
-      render: () => <Button>...</Button>,
+      render: () => (
+        <Dropdown menu={menuProps} placement="bottom" trigger={["click"]} arrow>
+          <Button size="small">
+            <MoreOutlined />
+          </Button>
+        </Dropdown>
+      ),
     },
   ];
 
@@ -158,11 +199,10 @@ const Inventory = () => {
         queryParams.push({ name: "gender", value: item });
       });
       filters.price?.forEach((item) => {
-        const price = item.toString().split('-');
+        const price = item.toString().split("-");
         queryParams.push({ name: "minPrice", value: price[0] });
         queryParams.push({ name: "maxPrice", value: price[1] });
         // console.log(price);
-        
       });
       setParams(queryParams);
     }
@@ -179,7 +219,7 @@ const Inventory = () => {
   };
   const hasSelected = selectedRowKeys.length > 0;
 
-  const handleBulkDelete = () => {}
+  const handleBulkDelete = () => {};
 
   return (
     <>

@@ -1,18 +1,31 @@
+import { TEyeglass } from "../../../types";
+import { TQueryParams, TResponseRedux } from "../../../types/global.type";
 import { baseApi } from "../../api/baseApi";
 
 
 
 const eyeglassApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        eyeglass: builder.query({
-            query: (query) => ({
-                url: '/eyeglass',
-                method: 'GET',
-                params: {
-                    searchTerm: query.searchTerm,
-                    ...query.filter,
+        getAllEyeglasses: builder.query({
+            query: (args) => {
+                const params = new URLSearchParams();
+                if (args) {
+                    args.forEach((item: TQueryParams) => {
+                        params.append(item.name, item.value as string)
+                    });
                 }
-            }),
+                return {
+                    url: '/eyeglass',
+                    method: 'GET',
+                    params: params
+                }
+            },
+            transformResponse: (response: TResponseRedux<TEyeglass[]>) => {
+                return {
+                    data: response.data,
+                    meta: response.meta
+                }
+            },
             providesTags: ['eyeglass'],
         }),
         addEyeglass: builder.mutation({
@@ -67,4 +80,4 @@ const eyeglassApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useEyeglassQuery, useAddEyeglassMutation, useUpdateEyeglassMutation, useDeleteEyeglassMutation, useSaleEyeglassMutation, useBulkDeleteEyeglassMutation, useSalesHistoryQuery } = eyeglassApi;
+export const { useGetAllEyeglassesQuery, useAddEyeglassMutation, useUpdateEyeglassMutation, useDeleteEyeglassMutation, useSaleEyeglassMutation, useBulkDeleteEyeglassMutation, useSalesHistoryQuery } = eyeglassApi;

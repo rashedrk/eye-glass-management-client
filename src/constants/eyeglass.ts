@@ -9,33 +9,41 @@ export const gender = ['Men', 'Women', 'Unisex'];
 
 export const frameMaterialOptions = frameMaterial.map(item => ({
     label: item,
+    text: item,
     value: item.toLowerCase()
 }));
 export const frameShapesOptions = frameShapes.map(item => ({
     label: item,
+    text: item,
     value: item.toLowerCase()
 }));
 export const colorOptions = color.map(item => ({
     label: item,
+    text: item,
     value: item.toLowerCase()
 }));
 export const frameTypeOptions = frameType.map(item => ({
     label: item,
+    text: item,
     value: item.toLowerCase()
 }));
 export const frameSizeOptions = frameSize.map(item => ({
     label: item,
+    text: item,
     value: item.toLowerCase()
 }));
 export const lensTypeOptions = lensType.map(item => ({
     label: item,
+    text: item,
     value: item.toLowerCase()
 }));
 export const brandsOptions = brands.map(item => ({
     label: item,
+    text: item,
     value: item.toLowerCase()
 }));
 export const genderOptions = gender.map(item => ({
     label: item,
+    text: item,
     value: item.toLowerCase()
 }));

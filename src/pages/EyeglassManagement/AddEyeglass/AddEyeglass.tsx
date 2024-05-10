@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Col, Flex, Form, Input, Row } from "antd";
 import CSForm from "../../../components/form/CSForm";
 import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
@@ -21,17 +22,18 @@ import {
   useCurrentToken,
 } from "../../../redux/features/auth/authSlice";
 import verifyToken from "../../../utils/verifyToken";
+import { TResponse } from "../../../types/global.type";
 
 const AddEyeglass = () => {
   const [addEyeglass] = useAddEyeglassMutation();
   const token = useAppSelector(useCurrentToken);
   // console.log(token);
-  
 
   const user = verifyToken(token as string) as TAuthUser;
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    // console.log(data);
+    const toastId = toast.loading("Creating new Eyeglass...");
     const formData = new FormData();
     formData.append("image", data.img);
     //hosting image to imagbb
@@ -43,13 +45,8 @@ const AddEyeglass = () => {
       }
     )
       .then((res) => res.json())
-      .then((imgbbData) => {
+      .then(async (imgbbData) => {
         if (imgbbData.success) {
-          console.log(imgbbData);
-
-          // data.img = imgbbData.data.display_url;
-          // console.log(data);
-
           const eyeglassData = {
             ...data,
             price: Number(data.price),
@@ -57,9 +54,12 @@ const AddEyeglass = () => {
             img: imgbbData.data.display_url,
             addedBy: user.userId,
           };
-
-          const response = addEyeglass(eyeglassData);
-          console.log(response);
+          const response = (await addEyeglass(eyeglassData)) as TResponse<any>;
+          if (response?.data?.success) {
+            toast.success("Eyeglass added successfully", { id: toastId });
+          } else {
+            toast.error("something went wrong!", { id: toastId });
+          }
         } else {
           toast.error("Failed to upload image!");
         }

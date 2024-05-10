@@ -1,13 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Button, Image, Table, TableColumnsType, TableProps } from "antd";
 import {
-  Button,
-  Dropdown,
-  Image,
-  MenuProps,
-  Table,
-  TableColumnsType,
-  TableProps,
-} from "antd";
-import { useGetAllEyeglassesQuery } from "../../../redux/features/eyeGlass/eyeglassApi";
+  useBulkDeleteEyeglassMutation,
+  useGetAllEyeglassesQuery,
+} from "../../../redux/features/eyeGlass/eyeglassApi";
 import { TEyeglass } from "../../../types";
 import {
   brandsOptions,
@@ -20,48 +16,16 @@ import {
   lensTypeOptions,
 } from "../../../constants/eyeglass";
 import { useState } from "react";
-import { TQueryParams } from "../../../types/global.type";
-import { MoreOutlined } from "@ant-design/icons";
-import EditEyeglassModal from "../../../components/ui/Modals/EditEyeglassModal";
+import { TQueryParams, TResponse } from "../../../types/global.type";
+import MoreOptionModal from "../../../components/ui/Modals/MoreOptionsModal";
+import { toast } from "sonner";
 
 const Inventory = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-  const [eyeglassId, setEyeglassId] = useState("");
+
   const { data: eyeglassData, isFetching } = useGetAllEyeglassesQuery(params);
-
-  const items: MenuProps["items"] = [
-    {
-      label: "Edit",
-      key: "edit",
-    },
-    {
-      label: "Delete",
-      key: "delete",
-    },
-    {
-      label: "Duplicate & Edit",
-      key: "duplicate_edit",
-    },
-  ];
-  const handleMoreDropdown: MenuProps["onClick"] = (data) => {
-    console.log(data.key);
-    if (data.key === "edit") {
-      setIsModalOpen(true);
-    }
-  };
-
-  //for modal close
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
-
-  const menuProps = {
-    items,
-    onClick: handleMoreDropdown,
-  };
+  const [bulkDelete] = useBulkDeleteEyeglassMutation();
 
   const columns: TableColumnsType<TEyeglass> = [
     {
@@ -133,14 +97,7 @@ const Inventory = () => {
     },
     {
       title: "Action",
-      render: (item) => (
-        <Dropdown menu={menuProps} placement="bottom" trigger={["click"]} arrow>
-          <Button onClick={() => setEyeglassId(item.key)} size="small">
-            <MoreOutlined />
-            <EditEyeglassModal eyeglass={item} isModalOpen={isModalOpen} handleCancel={handleCancel} />
-          </Button>
-        </Dropdown>
-      ),
+      render: (item) => <MoreOptionModal eyeglass={item} />,
     },
   ];
 
@@ -229,7 +186,16 @@ const Inventory = () => {
   };
   const hasSelected = selectedRowKeys.length > 0;
 
-  const handleBulkDelete = () => {};
+  const handleBulkDelete = async () => {
+    const toastId = toast.loading("Deleting...");
+    const res = (await bulkDelete(selectedRowKeys)) as TResponse<any>;
+    if (res.data.success) {
+      toast.success("Deleted Successfully", { id: toastId });
+      setSelectedRowKeys([]);
+    } else {
+      toast.error("Something went wrong!", { id: toastId });
+    }
+  };
 
   return (
     <>

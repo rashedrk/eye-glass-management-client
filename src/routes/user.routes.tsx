@@ -1,6 +1,7 @@
 import AddEyeglass from "../pages/EyeglassManagement/AddEyeglass/AddEyeglass";
 import DuplicateAndEdit from "../pages/EyeglassManagement/DuplicateAndEdit/DuplicateAndEdit";
 import Inventory from "../pages/EyeglassManagement/Inventory/Inventory";
+import SalesHistory from "../pages/SalesHistory/SalesHistory";
 
 export const userPaths = [
   {
@@ -22,7 +23,7 @@ export const userPaths = [
   {
     name: "Sales History",
     path: "sales-history",
-    element: <AddEyeglass />,
+    element: <SalesHistory />,
   },
   {
     path: '/duplicate_edit',

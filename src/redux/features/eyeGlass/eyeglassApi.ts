@@ -59,7 +59,7 @@ const eyeglassApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ['eyeglass']
         }),
-        saleEyeglass: builder.mutation({
+        sellEyeglass: builder.mutation({
             query: (data) => ({
                 url: `/sales/create`,
                 method: 'POST',
@@ -67,17 +67,23 @@ const eyeglassApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ['eyeglass']
         }),
-        salesHistory: builder.query({
-            query: (data) => ({
-                url: `/sales/${data.type}`,
-                method: 'GET',
-                params: {
-                    date: data.query
+        getAllSalesHistory: builder.query({
+            query: (args) => {
+                const params = new URLSearchParams();
+                if (args) {
+                    args.forEach((item: TQueryParams) => {
+                        params.append(item.name, item.value as string)
+                    });
                 }
-            }),
+                return {
+                    url: `/sales`,
+                    method: 'GET',
+                    params: params
+                }
+            }
         }),
 
     })
 })
 
-export const { useGetAllEyeglassesQuery, useAddEyeglassMutation, useUpdateEyeglassMutation, useDeleteEyeglassMutation, useSaleEyeglassMutation, useBulkDeleteEyeglassMutation, useSalesHistoryQuery } = eyeglassApi;
+export const { useGetAllEyeglassesQuery, useAddEyeglassMutation, useUpdateEyeglassMutation, useDeleteEyeglassMutation, useSellEyeglassMutation, useBulkDeleteEyeglassMutation, useGetAllSalesHistoryQuery } = eyeglassApi;

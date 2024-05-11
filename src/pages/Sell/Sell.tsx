@@ -10,7 +10,7 @@ const Sell = () => {
   const [params, setParams] = useState<TQueryParams[]>([]);
   const { data: eyeglassData, isLoading } = useGetAllEyeglassesQuery([
     { name: "page", value: page },
-    { name: "limit", value: 10 },
+    { name: "limit", value: 12 },
     ...params,
   ]);
 

@@ -13,6 +13,7 @@ import {
 import { useSellEyeglassMutation } from "../../../redux/features/eyeGlass/eyeglassApi";
 import { TResponse } from "../../../types/global.type";
 import { toast } from "sonner";
+import moment from "moment";
 
 const SellModal = ({ productId, isModalOpen, handleCancel }: any) => {
   const token = useAppSelector(useCurrentToken);
@@ -23,10 +24,13 @@ const SellModal = ({ productId, isModalOpen, handleCancel }: any) => {
     const toastId = toast.loading("creating...");
     const saleData = {
       ...data,
+      dateOfSale: moment(data.dateOfSale).format('YYYY-MM-DD'),
       quantity: Number(data.quantity),
       productId,
       soldBy: user.userId,
     };
+    // console.log(saleData);
+    
     const res = (await createSell(saleData)) as TResponse<any>;
     if (res?.data?.success) {
       toast.success("Sell successfully added", { id: toastId });

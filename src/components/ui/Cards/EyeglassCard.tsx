@@ -16,16 +16,25 @@ const EyeglassCard = ({ eyeglass }: { eyeglass: TEyeglass }) => {
   return (
     <>
       <Card
-      size="small"
-        cover={<Image height={140} src={eyeglass.img} />}
+        bordered
+        size="small"
+        cover={<Image src={eyeglass.img} />}
         style={{ textAlign: "center", marginBottom: 10 }}
-        actions={[<Button onClick={() => setIsModalOpen(true)} type="primary">Sell</Button>]}
+        actions={[
+          <Button onClick={() => setIsModalOpen(true)} type="primary">
+            Sell
+          </Button>,
+        ]}
       >
         <Title level={4}>${price}</Title>
         <Title level={5}>{name}</Title>
         <Text>Available: {quantity}</Text>
       </Card>
-      <SellModal eyeglass={eyeglass} isModalOpen={isModalOpen} handleCancel={handleCancel}/>
+      <SellModal
+        eyeglass={eyeglass}
+        isModalOpen={isModalOpen}
+        handleCancel={handleCancel}
+      />
     </>
   );
 };

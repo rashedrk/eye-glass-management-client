@@ -35,7 +35,7 @@ const Sell = () => {
         <>
         <Row gutter={8}>
           {eyeglassData?.data?.map((eyeglass) => (
-            <Col span={6}>
+            <Col span={24} md={{span: 12}} lg={{span: 6}}>
               <EyeglassCard key={eyeglass._id} eyeglass={eyeglass} />
             </Col>
           ))}

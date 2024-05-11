@@ -41,6 +41,7 @@ const DuplicateAndEdit = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Creating new Eyeglass...");
     delete data.key;
+    delete data._id;
     const eyeglassData = {
       ...data,
       price: Number(data.price),

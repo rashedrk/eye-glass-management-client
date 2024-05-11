@@ -6,7 +6,7 @@ import Invoicer from "../Invoicer";
 import { useRef } from "react";
 
 const InvoiceModal = ({ invoiceCancel, isInvoiceModalOpen, invoiceDetails }: any) => {
-  const componentRef = useRef();
+  const componentRef = useRef<HTMLDivElement>(null);
   return (
     <Modal
       title="Sale information"

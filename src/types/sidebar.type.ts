@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
 
-export type TAdminSidebarItem = {
+export type TSidebarItem = {
     key: string;
     label: ReactNode;
-    children?: TAdminSidebarItem[];
-} | undefined;
+    children?: TSidebarItem[];
+} ;
 
 export type TRoutes = {
     path: string;

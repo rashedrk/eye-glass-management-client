@@ -11,7 +11,7 @@ import {
   useBulkDeleteEyeglassMutation,
   useGetAllEyeglassesQuery,
 } from "../../../redux/features/eyeGlass/eyeglassApi";
-import { TEyeglass } from "../../../types";
+import { TEyeglass, TEyeglassTable } from "../../../types";
 import {
   brandsOptions,
   colorOptions,
@@ -115,7 +115,7 @@ const Inventory = () => {
     },
   ];
 
-  const tableData = eyeglassData?.data?.map(
+  const tableData: TEyeglassTable[] | undefined = eyeglassData?.data?.map(
     ({
       _id,
       name,
@@ -130,7 +130,11 @@ const Inventory = () => {
       brand,
       gender,
       img,
+      createdAt,
+      updatedAt,
+      addedBy,
     }) => ({
+      _id,
       key: _id,
       name,
       quantity,
@@ -144,6 +148,9 @@ const Inventory = () => {
       brand,
       gender,
       img,
+      createdAt,
+      updatedAt,
+      addedBy,
     })
   );
 
@@ -236,7 +243,7 @@ const Inventory = () => {
         pagination={false}
       />
       <Pagination
-      style={{marginTop:10}}
+        style={{ marginTop: 10 }}
         onChange={(value) => setPage(value)}
         total={metaData?.total}
         pageSize={metaData?.limit}

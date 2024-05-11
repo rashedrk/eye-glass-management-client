@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
-import { TAdminSidebarItem, TUserPath } from "../types";
+import { TSidebarItem, TUserPath } from "../types";
 
 export const sidebarItemsGenerator = (paths: TUserPath[]) => {
-  const sidebarItems = paths.reduce((acc: TAdminSidebarItem[], item) => {
+  const sidebarItems = paths.reduce((acc: TSidebarItem[], item) => {
     if (item.path && item.name) {
       acc.push({
         key: item.name,
@@ -10,22 +10,20 @@ export const sidebarItemsGenerator = (paths: TUserPath[]) => {
       });
     }
 
-    if (item.children) {
-      acc.push({
-        key: item.name as string,
-        label: item.name,
-        children: item.children.map((child) => {
-          if (child.name) {
-            return {
-              key: child.name,
-              label: (
-                <NavLink to={`/${child.path}`}>{child.name}</NavLink>
-              ),
-            };
-          }
-        }),
-      });
-    }
+    // if (item.children) {
+    //   acc.push({
+    //     key: item.name as string,
+    //     label: item.name,
+    //     children: item.children.map((child) => {
+    //       if (child.name) {
+    //         return {
+    //           key: child.name,
+    //           label: <NavLink to={`/${child.path}`}>{child.name}</NavLink>,
+    //         };
+    //       }
+    //     }),
+    //   });
+    // }
 
     return acc;
   }, []);

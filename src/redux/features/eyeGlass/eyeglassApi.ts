@@ -65,7 +65,7 @@ const eyeglassApi = baseApi.injectEndpoints({
                 method: 'POST',
                 body: data
             }),
-            // invalidatesTags: ['eyeglass']
+            invalidatesTags: ['eyeglass']
         }),
         getAllSalesHistory: builder.query({
             query: (args) => {

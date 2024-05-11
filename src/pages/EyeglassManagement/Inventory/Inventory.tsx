@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Image, Table, TableColumnsType, TableProps } from "antd";
+import {
+  Button,
+  Image,
+  Pagination,
+  Table,
+  TableColumnsType,
+  TableProps,
+} from "antd";
 import {
   useBulkDeleteEyeglassMutation,
   useGetAllEyeglassesQuery,
@@ -21,11 +28,18 @@ import MoreOptionModal from "../../../components/ui/Modals/MoreOptionsModal";
 import { toast } from "sonner";
 
 const Inventory = () => {
-  const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
+  const [page, setPage] = useState(1);
+  const [params, setParams] = useState<TQueryParams[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
-  const { data: eyeglassData, isFetching } = useGetAllEyeglassesQuery(params);
+  const { data: eyeglassData, isFetching } = useGetAllEyeglassesQuery([
+    { name: "page", value: page },
+    { name: "limit", value: 10 },
+    ...params,
+  ]);
   const [bulkDelete] = useBulkDeleteEyeglassMutation();
+
+  const metaData = eyeglassData?.meta;
 
   const columns: TableColumnsType<TEyeglass> = [
     {
@@ -190,10 +204,10 @@ const Inventory = () => {
     const toastId = toast.loading("Deleting...");
     const res = (await bulkDelete(selectedRowKeys)) as TResponse<any>;
     if (res.data.success) {
-      toast.success("Deleted Successfully", { id: toastId });
+      toast.success("Deleted Successfully", { id: toastId, duration: 2000 });
       setSelectedRowKeys([]);
     } else {
-      toast.error("Something went wrong!", { id: toastId });
+      toast.error("Something went wrong!", { id: toastId, duration: 2000 });
     }
   };
 
@@ -219,6 +233,13 @@ const Inventory = () => {
         onChange={onChange}
         size="middle"
         rowSelection={rowSelection}
+        pagination={false}
+      />
+      <Pagination
+      style={{marginTop:10}}
+        onChange={(value) => setPage(value)}
+        total={metaData?.total}
+        pageSize={metaData?.limit}
       />
     </>
   );

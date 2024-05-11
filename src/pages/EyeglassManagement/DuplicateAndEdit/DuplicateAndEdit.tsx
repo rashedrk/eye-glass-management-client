@@ -30,7 +30,7 @@ import { TResponse } from "../../../types/global.type";
 const DuplicateAndEdit = () => {
   const location = useLocation();
   const eyeglass = location.state.eyeglass;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState(eyeglass.img);
   const [addEyeglass] = useAddEyeglassMutation();
   const token = useAppSelector(useCurrentToken);
@@ -49,13 +49,15 @@ const DuplicateAndEdit = () => {
       addedBy: user.userId,
     };
 
-    const response = await addEyeglass(eyeglassData) as TResponse<any>;
+    const response = (await addEyeglass(eyeglassData)) as TResponse<any>;
     if (response?.data?.success) {
-        toast.success('Eyeglass added successfully', {id: toastId});
-        navigate('/inventory')
-    }
-    else {
-        toast.error('something went wrong!', {id: toastId})
+      toast.success("Eyeglass added successfully", {
+        id: toastId,
+        duration: 2000,
+      });
+      navigate("/inventory");
+    } else {
+      toast.error("something went wrong!", { id: toastId, duration: 2000 });
     }
   };
 
@@ -75,9 +77,15 @@ const DuplicateAndEdit = () => {
       .then((imgbbData) => {
         if (imgbbData.success) {
           setImageUrl(imgbbData.data.display_url);
-          toast.success("Image uploaded successfully", { id: toastId });
+          toast.success("Image uploaded successfully", {
+            id: toastId,
+            duration: 2000,
+          });
         } else {
-          toast.error("Failed to upload image!", { id: toastId });
+          toast.error("Failed to upload image!", {
+            id: toastId,
+            duration: 2000,
+          });
         }
       });
   };

@@ -30,7 +30,7 @@ const SellModal = ({ eyeglass, isModalOpen, handleCancel }: any) => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("creating...");
     // console.log(data.dateOfSale.$d);
-    
+
     const saleData = {
       ...data,
       dateOfSale: moment(data.dateOfSale.$d).format("MM-DD-YYYY"),
@@ -49,11 +49,11 @@ const SellModal = ({ eyeglass, isModalOpen, handleCancel }: any) => {
     const res = (await createSell(saleData)) as TResponse<any>;
     if (res?.data?.success) {
       setInvoiceDetails(invoices);
-      toast.success("Sell successfully added", { id: toastId });
+      toast.success("Sell successfully added", { id: toastId, duration: 2000 });
       handleCancel();
       setIsInvoiceModalOpen(true);
     } else {
-      toast.error("something went wrong!", { id: toastId });
+      toast.error("something went wrong!", { id: toastId, duration: 2000 });
     }
   };
   return (

@@ -39,7 +39,7 @@ const Login = () => {
             name="password"
             label="Enter your Password"
           />
-          <Button type="primary" htmlType="submit">
+          <Button style={{marginRight: 5}} type="primary" htmlType="submit">
             Log in
           </Button>
           Or <a href="/register">register now!</a>

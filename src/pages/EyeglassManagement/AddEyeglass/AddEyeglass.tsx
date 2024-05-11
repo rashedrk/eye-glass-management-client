@@ -56,9 +56,15 @@ const AddEyeglass = () => {
           };
           const response = (await addEyeglass(eyeglassData)) as TResponse<any>;
           if (response?.data?.success) {
-            toast.success("Eyeglass added successfully", { id: toastId });
+            toast.success("Eyeglass added successfully", {
+              id: toastId,
+              duration: 2000,
+            });
           } else {
-            toast.error("something went wrong!", { id: toastId });
+            toast.error("something went wrong!", {
+              id: toastId,
+              duration: 2000,
+            });
           }
         } else {
           toast.error("Failed to upload image!");

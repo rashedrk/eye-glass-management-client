@@ -65,7 +65,7 @@ const MoreOptionModal = ({ eyeglass }: any) => {
   };
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const toastId = toast.loading("updating...")
+    const toastId = toast.loading("updating...");
     const id = data.key;
     delete data.img;
     delete data.key;
@@ -80,20 +80,20 @@ const MoreOptionModal = ({ eyeglass }: any) => {
     const res = (await updateEyeglass(formData)) as TResponse<any>;
     if (res?.data?.success) {
       setIsModalOpen(false);
-      toast.success("Updated Successfully", {id: toastId});
+      toast.success("Updated Successfully", { id: toastId, duration: 2000 });
     } else {
-      toast.error("Something went wrong!", {id: toastId});
+      toast.error("Something went wrong!", { id: toastId, duration: 2000 });
     }
   };
 
   //Delete option
   const handleDelete = async () => {
     const res = (await deleteEyeglass(eyeglass.key)) as TResponse<any>;
-    const toastId = toast.loading("deleting...")
+    const toastId = toast.loading("deleting...");
     if (res?.data?.success) {
-      toast.success(res.data.message, {id: toastId});
+      toast.success(res.data.message, { id: toastId, duration: 2000 });
     } else {
-      toast.error("something went wrong!", {id: toastId});
+      toast.error("something went wrong!", { id: toastId, duration: 2000 });
     }
   };
 

@@ -33,7 +33,7 @@ const SellModal = ({ eyeglass, isModalOpen, handleCancel }: any) => {
     
     const saleData = {
       ...data,
-      dateOfSale: moment(data.dateOfSale.$d).format("DD-MM-YYYY"),
+      dateOfSale: moment(data.dateOfSale.$d).format("MM-DD-YYYY"),
       quantity: Number(data.quantity),
       productId: eyeglass._id,
       soldBy: user.userId,

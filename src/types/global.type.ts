@@ -27,5 +27,5 @@ export type TResponseRedux<T> = TResponse<T> & BaseQueryApi;
 
 export type TQueryParams = {
     name: string,
-    value: React.Key | string | string []
+    value: React.Key | string | string [] | boolean
 }

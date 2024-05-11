@@ -16,6 +16,7 @@ const EyeglassCard = ({ eyeglass }: { eyeglass: TEyeglass }) => {
   return (
     <>
       <Card
+      size="small"
         cover={<Image height={140} src={eyeglass.img} />}
         style={{ textAlign: "center", marginBottom: 10 }}
         actions={[<Button onClick={() => setIsModalOpen(true)} type="primary">Sell</Button>]}

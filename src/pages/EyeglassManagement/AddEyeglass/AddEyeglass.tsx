@@ -67,7 +67,10 @@ const AddEyeglass = () => {
             });
           }
         } else {
-          toast.error("Failed to upload image!");
+          toast.error("Failed to upload image!", {
+            id: toastId,
+            duration: 2000,
+          });
         }
       });
   };

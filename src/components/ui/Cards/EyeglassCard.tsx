@@ -12,6 +12,7 @@ const EyeglassCard = ({ eyeglass }: { eyeglass: TEyeglass }) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
   return (
     <>
       <Card
@@ -23,7 +24,7 @@ const EyeglassCard = ({ eyeglass }: { eyeglass: TEyeglass }) => {
         <Title level={5}>{name}</Title>
         <Text>Available: {quantity}</Text>
       </Card>
-      <SellModal productId={eyeglass._id} isModalOpen={isModalOpen} handleCancel={handleCancel}/>
+      <SellModal eyeglass={eyeglass} isModalOpen={isModalOpen} handleCancel={handleCancel}/>
     </>
   );
 };

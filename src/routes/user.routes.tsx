@@ -1,3 +1,4 @@
+import Invoicer from "../components/ui/Invoicer";
 import AddEyeglass from "../pages/EyeglassManagement/AddEyeglass/AddEyeglass";
 import DuplicateAndEdit from "../pages/EyeglassManagement/DuplicateAndEdit/DuplicateAndEdit";
 import Inventory from "../pages/EyeglassManagement/Inventory/Inventory";
@@ -29,5 +30,9 @@ export const userPaths = [
   {
     path: '/duplicate_edit',
     element: <DuplicateAndEdit />
+  },
+  {
+    path: '/invoice',
+    element: <Invoicer />
   },
 ];

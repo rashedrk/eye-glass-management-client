@@ -13,9 +13,9 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: (
-      // <ProtectedRoute role="manager">
+      <ProtectedRoute>
         <App />
-      // </ProtectedRoute>
+      </ProtectedRoute>
     ),
     children: routeGenerator(userPaths)
   },

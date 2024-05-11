@@ -22,7 +22,7 @@ const Login = () => {
       const user = verifyToken(res.data.accessToken) as TAuthUser;
       dispatch(setUser({ user, token: res.data.accessToken }));
       toast.success("login successful", { id: toastId, duration: 2000 });
-      navigate(`/`);
+      navigate(`/inventory`);
     } catch (error) {
       // console.log(error.data.message);
 

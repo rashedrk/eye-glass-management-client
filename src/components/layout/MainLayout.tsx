@@ -20,7 +20,7 @@ const MainLayout = () => {
     <Layout style={{ height: "100%" }}>
       <Sidebar />
       <Layout>
-        <Header style={{ padding: 0 }} >
+        <Header style={{ padding: 10 , display: "flex" , justifyContent: "end", alignItems: 'center'}} >
           <Button onClick={handleLogout}>LogOut</Button>
         </Header>
         <Content style={{ margin: "24px 16px 0" }}>

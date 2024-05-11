@@ -24,7 +24,7 @@ const Sidebar = () => {
           alignItems: "center",
         }}
       >
-        <h1>Eye glass Management</h1>
+        <h1>GlassHouse</h1>
       </div>
       <Menu
         theme="dark"

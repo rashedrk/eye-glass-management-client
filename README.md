@@ -8,7 +8,7 @@ The front-end of the Eyeglass Sales and User Authentication System is designed t
 
 ### Live URL
 
-The front-end is integrated with the backend and can be accessed through the live version of the application at [Eyeglass Sales](https://eye-glass-management-dashboard-client.vercel.app/).
+The front-end is integrated with the backend and can be accessed through the live version of the application at [Eyeglass Sales](https://eye-glass-management-v2-client.vercel.app/).
 
 ## Features
 

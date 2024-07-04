@@ -33,12 +33,12 @@ To set up the front-end locally, follow these steps:
 
 
 ```bash
-git clone https://github.com/Porgramming-Hero-web-course/l2-b2-assignment-6-fronten-rashedrk.git
+git clone https://github.com/rashedrk/eye-glass-management-client.git
 ```
 
 2. **Install dependencies**
 ```bash
-cd eyeglass-sales
+cd eye-glass-management-client
 npm install
 
 ```

@@ -7,6 +7,7 @@ export const sidebarItemsGenerator = (paths: TUserPath[]) => {
       acc.push({
         key: item.name,
         label: <NavLink to={`/${item.path}`}>{item.name}</NavLink>,
+        icon: item.icon,
       });
     }
 

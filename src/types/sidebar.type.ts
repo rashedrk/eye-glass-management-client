@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 export type TSidebarItem = {
     key: string;
     label: ReactNode;
+    icon?: ReactNode;
     children?: TSidebarItem[];
 } ;
 
@@ -16,4 +17,5 @@ export type TUserPath = {
     path?: string;
     element?: ReactNode;
     children?: TUserPath[];
+    icon?: ReactNode;
 };

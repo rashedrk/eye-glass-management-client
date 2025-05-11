@@ -5,18 +5,51 @@ import { sidebarItemsGenerator } from "../../utils/sidebarItemsGenerator";
 
 const { Sider } = Layout;
 
-const Sidebar = () => {
+const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
   const sidebarItems = sidebarItemsGenerator(userPaths);
 
   return (
+    // <Sider
+    //   breakpoint="lg"
+    //   collapsedWidth="0"
+    //   style={{ height: "100vh", position: "sticky", top: "0" }}
+    // >
+    //   <div
+    //     style={{
+    //       color: "white",
+    //       height: "4rem",
+    //       textAlign: "center",
+    //       display: "flex",
+    //       justifyContent: "center",
+    //       alignItems: "center",
+    //     }}
+    //   >
+    //     <h1>GlassHouse</h1>
+    //   </div>
+    //   <Menu
+    //     theme="dark"
+    //     mode="inline"
+    //     defaultSelectedKeys={["4"]}
+    //     items={sidebarItems}
+    //   />
+    // </Sider>
+
     <Sider
+      trigger={null}
+      collapsible
+      collapsed={collapsed}
       breakpoint="lg"
-      collapsedWidth="0"
-      style={{ height: "100vh", position: "sticky", top: "0" }}
+      // collapsedWidth="0"
+      style={{
+        height: "100vh",
+        position: "sticky",
+        top: "0",
+        backgroundColor: "white",
+      }}
     >
       <div
         style={{
-          color: "white",
+          color: "black",
           height: "4rem",
           textAlign: "center",
           display: "flex",
@@ -24,12 +57,25 @@ const Sidebar = () => {
           alignItems: "center",
         }}
       >
-        <h1>GlassHouse</h1>
+        <h1
+          style={{
+            margin: 0,
+            fontSize: collapsed ? "0.8rem" : "1.5rem",
+            transition: "all 0.2s ease",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+          }}
+        >
+          GlassHouse
+        </h1>
       </div>
+      <div style={{ borderBottom: "1px solid #f0f0f0", margin: "0 16px" }} />
+
       <Menu
-        theme="dark"
+        theme="light"
         mode="inline"
-        defaultSelectedKeys={["4"]}
+        defaultSelectedKeys={["dashboard"]}
+        style={{ fontSize: "16px" }}
         items={sidebarItems}
       />
     </Sider>

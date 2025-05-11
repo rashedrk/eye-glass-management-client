@@ -9,42 +9,18 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
   const sidebarItems = sidebarItemsGenerator(userPaths);
 
   return (
-    // <Sider
-    //   breakpoint="lg"
-    //   collapsedWidth="0"
-    //   style={{ height: "100vh", position: "sticky", top: "0" }}
-    // >
-    //   <div
-    //     style={{
-    //       color: "white",
-    //       height: "4rem",
-    //       textAlign: "center",
-    //       display: "flex",
-    //       justifyContent: "center",
-    //       alignItems: "center",
-    //     }}
-    //   >
-    //     <h1>GlassHouse</h1>
-    //   </div>
-    //   <Menu
-    //     theme="dark"
-    //     mode="inline"
-    //     defaultSelectedKeys={["4"]}
-    //     items={sidebarItems}
-    //   />
-    // </Sider>
 
     <Sider
       trigger={null}
       collapsible
       collapsed={collapsed}
       breakpoint="lg"
-      // collapsedWidth="0"
       style={{
         height: "100vh",
         position: "sticky",
         top: "0",
         backgroundColor: "white",
+        borderRight: "1px solid #f0f0f0",
       }}
     >
       <div

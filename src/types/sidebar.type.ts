@@ -5,7 +5,7 @@ export type TSidebarItem = {
     label: ReactNode;
     icon?: ReactNode;
     children?: TSidebarItem[];
-} ;
+};
 
 export type TRoutes = {
     path: string;

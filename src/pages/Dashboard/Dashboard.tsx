@@ -11,6 +11,7 @@ import {
   NumberOutlined,
 } from "@ant-design/icons";
 import { CSSProperties } from "react";
+import DashboardTopCard from "../../components/ui/Cards/DashboardTopCard";
 
 // Define styles
 const styles = {
@@ -40,177 +41,37 @@ const Dashboard = () => {
       <h2>Dashboard</h2>
       <Row gutter={16}>
         <Col span={6}>
-          <Card
-            style={{
-              backgroundColor: "#FF9F43",
-              borderRadius: "8px",
-              color: "white",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <FileTextOutlined
-                style={{
-                  fontSize: "24px",
-                  color: "white",
-                  marginRight: "10px",
-                  padding: "8px",
-                  backgroundColor: "rgba(255,255,255,0.2)",
-                  borderRadius: "8px",
-                }}
-              />
-              <Statistic
-                title={<span style={{ color: "white" }}>Total Sales</span>}
-                value={48988078}
-                precision={0}
-                valueStyle={{ color: "white", fontWeight: 700 }}
-                prefix="$"
-                suffix={
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      backgroundColor: "rgba(255,255,255,0.2)",
-                      padding: "2px 8px",
-                      borderRadius: "12px",
-                      marginLeft: "10px",
-                    }}
-                  >
-                    +22%
-                  </span>
-                }
-              />
-            </div>
-          </Card>
+          <DashboardTopCard
+            Icon={<FileTextOutlined />}
+            title="Total Sales"
+            value={48988078}
+            backgroundColor="#FF9F43"
+          />
         </Col>
         <Col span={6}>
-          <Card
-            style={{
-              backgroundColor: "#132C4A",
-              borderRadius: "8px",
-              color: "white",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <SyncOutlined
-                style={{
-                  fontSize: "24px",
-                  color: "white",
-                  marginRight: "10px",
-                  padding: "8px",
-                  backgroundColor: "rgba(255,255,255,0.2)",
-                  borderRadius: "8px",
-                }}
-              />
-              <Statistic
-                title={
-                  <span style={{ color: "white" }}>Total Sales Return</span>
-                }
-                value={16478145}
-                precision={0}
-                valueStyle={{ color: "white", fontWeight: 700 }}
-                prefix="$"
-                suffix={
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      backgroundColor: "rgba(255,0,0,0.2)",
-                      padding: "2px 8px",
-                      borderRadius: "12px",
-                      marginLeft: "10px",
-                      color: "#ff6b6b",
-                    }}
-                  >
-                    -22%
-                  </span>
-                }
-              />
-            </div>
-          </Card>
+          <DashboardTopCard
+            Icon={<SyncOutlined />}
+            title="Total Sales Return"
+            value={16478145}
+            backgroundColor="#132C4A"
+          />
         </Col>
         <Col span={6}>
-          <Card
-            style={{
-              backgroundColor: "#00A389",
-              borderRadius: "8px",
-              color: "white",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <GiftOutlined
-                style={{
-                  fontSize: "24px",
-                  color: "white",
-                  marginRight: "10px",
-                  padding: "8px",
-                  backgroundColor: "rgba(255,255,255,0.2)",
-                  borderRadius: "8px",
-                }}
-              />
-              <Statistic
-                title={<span style={{ color: "white" }}>Total Purchase</span>}
-                value={24145789}
-                precision={0}
-                valueStyle={{ color: "white", fontWeight: 700 }}
-                prefix="$"
-                suffix={
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      backgroundColor: "rgba(255,255,255,0.2)",
-                      padding: "2px 8px",
-                      borderRadius: "12px",
-                      marginLeft: "10px",
-                    }}
-                  >
-                    +22%
-                  </span>
-                }
-              />
-            </div>
-          </Card>
+        <DashboardTopCard
+            Icon={<GiftOutlined />}
+            title="Total Purchase"
+            value={24145789}
+            backgroundColor="#00A389"
+          />
+          
         </Col>
         <Col span={6}>
-          <Card
-            style={{
-              backgroundColor: "#3366FF",
-              borderRadius: "8px",
-              color: "white",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <CheckSquareOutlined
-                style={{
-                  fontSize: "24px",
-                  color: "white",
-                  marginRight: "10px",
-                  padding: "8px",
-                  backgroundColor: "rgba(255,255,255,0.2)",
-                  borderRadius: "8px",
-                }}
-              />
-              <Statistic
-                title={
-                  <span style={{ color: "white" }}>Total Purchase Return</span>
-                }
-                value={18458747}
-                precision={0}
-                valueStyle={{ color: "white", fontWeight: 700 }}
-                prefix="$"
-                suffix={
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      backgroundColor: "rgba(255,255,255,0.2)",
-                      padding: "2px 8px",
-                      borderRadius: "12px",
-                      marginLeft: "10px",
-                    }}
-                  >
-                    +22%
-                  </span>
-                }
-              />
-            </div>
-          </Card>
+          <DashboardTopCard
+            Icon={<CheckSquareOutlined />}
+            title="Total Purchase Return"
+            value={18458747}
+            backgroundColor="#3366FF"
+          />
         </Col>
       </Row>
 

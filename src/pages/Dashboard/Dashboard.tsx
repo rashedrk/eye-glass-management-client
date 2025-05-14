@@ -12,6 +12,7 @@ import {
 import DashboardTopCard from "../../components/ui/Cards/DashboardTopCard";
 import DashboardInfoCard from "../../components/ui/Cards/DashboardInfoCard";
 import SalesAndPurchaseChart from "../../components/ui/Charts/SalesAndPurchaseChart";
+import OverallInfo from "../../components/Dashboard/OverallInfo";
 
 const Dashboard = () => {
   // const { data: eyeglassData } = useGetAllEyeglassesQuery([]);
@@ -103,11 +104,14 @@ const Dashboard = () => {
           />
         </Col>
       </Row>
+
       <Row gutter={16} style={{ marginTop: "16px" }}>
         <Col span={16}>
           <SalesAndPurchaseChart />
         </Col>
-        <Col span={8}></Col>
+        <Col span={8}>
+          <OverallInfo />
+        </Col>
       </Row>
     </div>
   );

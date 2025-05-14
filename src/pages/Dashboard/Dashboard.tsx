@@ -11,6 +11,7 @@ import {
 } from "@ant-design/icons";
 import DashboardTopCard from "../../components/ui/Cards/DashboardTopCard";
 import DashboardInfoCard from "../../components/ui/Cards/DashboardInfoCard";
+import SalesAndPurchaseChart from "../../components/ui/Charts/SalesAndPurchaseChart";
 
 const Dashboard = () => {
   // const { data: eyeglassData } = useGetAllEyeglassesQuery([]);
@@ -87,7 +88,7 @@ const Dashboard = () => {
             title="Total Expenses"
             icon={<DollarOutlined />}
             link="/expenses"
-            percentage={35}
+            percentage={41}
             iconColor="#FF9966"
           />
         </Col>
@@ -97,10 +98,16 @@ const Dashboard = () => {
             title="Total Payment Returns"
             icon={<NumberOutlined />}
             link="/payment-returns"
-            percentage={35}
+            percentage={-25}
             iconColor="#663399"
           />
         </Col>
+      </Row>
+      <Row gutter={16} style={{ marginTop: "16px" }}>
+        <Col span={16}>
+          <SalesAndPurchaseChart />
+        </Col>
+        <Col span={8}></Col>
       </Row>
     </div>
   );

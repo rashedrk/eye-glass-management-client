@@ -13,6 +13,7 @@ import DashboardTopCard from "../../components/ui/Cards/DashboardTopCard";
 import DashboardInfoCard from "../../components/ui/Cards/DashboardInfoCard";
 import SalesAndPurchaseChart from "../../components/ui/Charts/SalesAndPurchaseChart";
 import OverallInfo from "../../components/Dashboard/OverallInfo";
+import TopSellingProducts from "../../components/ui/Cards/TopSellingProducts";
 
 const Dashboard = () => {
   // const { data: eyeglassData } = useGetAllEyeglassesQuery([]);
@@ -111,6 +112,17 @@ const Dashboard = () => {
         </Col>
         <Col span={8}>
           <OverallInfo />
+        </Col>
+      </Row>
+      <Row gutter={16} style={{ marginTop: "16px" }}>
+        <Col span={8}>
+          <TopSellingProducts/>
+        </Col>
+        <Col span={8}>
+          
+        </Col>
+        <Col span={8}>
+          
         </Col>
       </Row>
     </div>

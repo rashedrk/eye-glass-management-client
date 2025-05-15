@@ -28,7 +28,6 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h2>Dashboard</h2>
       <Row gutter={16}>
         <Col span={6}>
           <DashboardTopCard

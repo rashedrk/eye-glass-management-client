@@ -1,10 +1,6 @@
 import { Card } from "antd";
-import { NavLink } from "react-router-dom";
+import ViewAll from "../ViewAll";
 
-import { theme } from "antd";
-import { useState } from "react";
-
-const { useToken } = theme;
 
 const DashboardInfoCard = ({
   value,
@@ -21,15 +17,7 @@ const DashboardInfoCard = ({
   percentage: number;
   iconColor: string;
 }) => {
-  const { token } = useToken();
 
-  const [isHovered, setIsHovered] = useState(false);
-
-  const viewAllStyle = {
-    textDecoration: "underline",
-    color: isHovered ? token.colorPrimary : "#000",
-    transition: "color 0.3s",
-  };
   const percentageColor = percentage >= 0 ? "#4CAF50" : "#F44336"; // Green for positive, Red for negative
   
   // Determine the prefix symbol for the percentage
@@ -82,14 +70,7 @@ const DashboardInfoCard = ({
           </span>
           <span style={{ color: "#666" }}> vs Last Month</span>
         </div>
-        <NavLink
-          to={link}
-          style={viewAllStyle}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          View All
-        </NavLink>
+        <ViewAll link={link} />
       </div>
     </Card>
   );

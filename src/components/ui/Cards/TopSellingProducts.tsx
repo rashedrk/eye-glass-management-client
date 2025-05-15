@@ -9,8 +9,8 @@ const products = [
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=facearea&w=48&h=48",
     name: "Charger Cable - Lighting",
-    price: "$187",
-    sales: "247+ Sales",
+    price: 187,
+    sales: 247,
     change: 25,
     isIncrease: true,
   },
@@ -18,8 +18,8 @@ const products = [
     image:
       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=facearea&w=48&h=48",
     name: "Yves Saint Eau De Parfum",
-    price: "$145",
-    sales: "289+ Sales",
+    price: 145,
+    sales: 289,
     change: 25,
     isIncrease: true,
   },
@@ -27,8 +27,8 @@ const products = [
     image:
       "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=facearea&w=48&h=48",
     name: "Apple Airpods 2",
-    price: "$458",
-    sales: "300+ Sales",
+    price: 458,
+    sales: 300,
     change: 25,
     isIncrease: true,
   },
@@ -36,8 +36,8 @@ const products = [
     image:
       "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=facearea&w=48&h=48",
     name: "Vacuum Cleaner",
-    price: "$139",
-    sales: "225+ Sales",
+    price: 139,
+    sales: 225,
     change: 21,
     isIncrease: false,
   },
@@ -45,8 +45,8 @@ const products = [
     image:
       "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=facearea&w=48&h=48",
     name: "Samsung Galaxy S21 Fe 5g",
-    price: "$898",
-    sales: "365+ Sales",
+    price: 898,
+    sales: 365,
     change: 25,
     isIncrease: true,
   },
@@ -119,9 +119,9 @@ const TopSellingProducts = () => {
                 {product.name}
               </div>
               <div style={{ color: "#888", fontSize: 13 }}>
-                {product.price}{" "}
+                ${product.price}{" "}
                 <span style={{ margin: "0 8px", color: token?.colorPrimary }}>•</span>{" "}
-                {product.sales}
+                {product.sales}+ Sales
               </div>
             </div>
             <span

@@ -41,7 +41,7 @@ const products = [
 ];
 
 
-const TopSellingProducts = () => {
+const LowStockProductsCard = () => {
   return (
     <Card
       title={
@@ -111,4 +111,4 @@ const TopSellingProducts = () => {
   );
 };
 
-export default TopSellingProducts;
+export default LowStockProductsCard;

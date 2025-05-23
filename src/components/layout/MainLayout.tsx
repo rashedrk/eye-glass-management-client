@@ -38,7 +38,7 @@ const MainLayout = () => {
             }}
             
           />
-          <Button onClick={handleLogout}>LogOut</Button>
+          <Button onClick={handleLogout}  type="primary" style={{ backgroundColor: '#051A2C', color: '#ffffff' }}>LogOut</Button>
         </Header>
         <Content style={{ margin: "24px 16px 0" }}>
           <div

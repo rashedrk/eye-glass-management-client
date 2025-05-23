@@ -262,7 +262,7 @@ const SalesHistory = () => {
             ],
           }}
         >
-          <Button icon={<DownloadOutlined />}>
+          <Button icon={<DownloadOutlined />}  type="primary" style={{ backgroundColor: '#051A2C', color: '#ffffff' }}>
             Export <DownOutlined />
           </Button>
         </Dropdown>

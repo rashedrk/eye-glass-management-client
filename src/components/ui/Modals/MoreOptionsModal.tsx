@@ -19,7 +19,7 @@ import {
 } from "../../../redux/features/eyeGlass/eyeglassApi";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
-import { MoreOutlined } from "@ant-design/icons";
+import { CopyOutlined, DeleteOutlined, EditOutlined, MoreOutlined } from "@ant-design/icons";
 import { toast } from "sonner";
 import { TResponse } from "../../../types/global.type";
 import { useNavigate } from "react-router-dom";
@@ -35,14 +35,17 @@ const MoreOptionModal = ({ eyeglass }: any) => {
     {
       label: "Edit",
       key: "edit",
+      icon: <EditOutlined />,
     },
     {
       label: "Delete",
       key: "delete",
+      icon: <DeleteOutlined />,
     },
     {
-      label: "Duplicate & Edit",
+      label: "Copy & Edit",
       key: "duplicate_edit",
+      icon: <CopyOutlined />,
     },
   ];
   const handleMoreDropdown: MenuProps["onClick"] = (data) => {

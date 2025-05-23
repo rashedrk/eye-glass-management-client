@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Button,
+  Dropdown,
   Image,
+  Input,
   Pagination,
   Table,
   TableColumnsType,
@@ -24,17 +26,32 @@ import {
 } from "../../../constants/eyeglass";
 import { useState } from "react";
 import { TQueryParams, TResponse } from "../../../types/global.type";
+import {
+  DeleteOutlined,
+  DownloadOutlined,
+  DownOutlined,
+} from "@ant-design/icons";
+import { FileExcelOutlined } from "@ant-design/icons";
 import MoreOptionModal from "../../../components/ui/Modals/MoreOptionsModal";
+import { FilePdfOutlined } from "@ant-design/icons";
 import { toast } from "sonner";
+import { PlusOutlined } from "@ant-design/icons";
+import { NavLink } from "react-router-dom";
+
+import jsPDF from "jspdf";
+import  autoTable from "jspdf-autotable";
+import * as XLSX from "xlsx";
 
 const Inventory = () => {
   const [page, setPage] = useState(1);
   const [params, setParams] = useState<TQueryParams[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const { data: eyeglassData, isFetching } = useGetAllEyeglassesQuery([
     { name: "page", value: page },
     { name: "limit", value: 10 },
+    { name: "searchTerm", value: searchTerm },
     ...params,
   ]);
   const [bulkDelete] = useBulkDeleteEyeglassMutation();
@@ -218,20 +235,206 @@ const Inventory = () => {
     }
   };
 
+  const handleSearch = (value: string) => {
+    setSearchTerm(value);
+    setPage(1); // Reset to first page when searching
+  };
+
+  const handleExport = async (type: "pdf" | "excel") => {
+    if (!eyeglassData?.data) {
+      toast.error("No data to export");
+      return;
+    }
+  
+    try {
+      const data = eyeglassData.data.map((item) => ({
+        Name: item.name,
+        Quantity: item.quantity,
+        Price: `$${item.price}`,
+        "Frame Material": item.frameMaterial,
+        "Frame Shapes": item.frameShapes,
+        Color: item.color,
+        "Frame Type": item.frameType,
+        "Frame Size": item.frameSize,
+        "Lens Type": item.lensType,
+        Brand: item.brand,
+        Gender: item.gender,
+      }));
+  
+      if (type === "pdf") {
+        // Create new PDF document
+        const doc = new jsPDF({
+          orientation: "landscape",
+          unit: "pt",
+          format: "a4",
+        });
+  
+        // Add title
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(24);
+        doc.text("Eyeglass Inventory Report", 40, 40);
+  
+        // Add date and time
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(12);
+        doc.text(`Generated on: ${new Date().toLocaleString()}`, 40, 60);
+  
+        // Use autoTable function directly (not as method)
+        autoTable(doc, {
+          head: [Object.keys(data[0])],
+          body: data.map((item) => Object.values(item)),
+          startY: 80,
+          theme: "grid",
+          styles: {
+            fontSize: 8,
+            cellPadding: 3,
+            overflow: "linebreak",
+            halign: "center",
+          },
+          headStyles: {
+            fillColor: [41, 128, 185],
+            textColor: 255,
+            fontSize: 10,
+            fontStyle: "bold",
+            halign: "center",
+          },
+          alternateRowStyles: {
+            fillColor: [245, 245, 245],
+          },
+          margin: { top: 80, left: 20, right: 20 },
+          tableWidth: 'auto',
+          columnStyles: {
+            0: { cellWidth: 80 }, // Name
+            1: { cellWidth: 40 }, // Quantity
+            2: { cellWidth: 50 }, // Price
+            3: { cellWidth: 70 }, // Frame Material
+            4: { cellWidth: 70 }, // Frame Shapes
+            5: { cellWidth: 50 }, // Color
+            6: { cellWidth: 60 }, // Frame Type
+            7: { cellWidth: 60 }, // Frame Size
+            8: { cellWidth: 60 }, // Lens Type
+            9: { cellWidth: 60 }, // Brand
+            10: { cellWidth: 50 }, // Gender
+          },
+          didDrawPage: function (data: any) {
+            doc.setFontSize(10);
+            doc.text(
+              `Page ${data.pageNumber}`,
+              doc.internal.pageSize.width - 40,
+              doc.internal.pageSize.height - 20,
+              { align: "right" }
+            );
+          },
+        });
+  
+        // Save the PDF
+        doc.save("eyeglass-inventory.pdf");
+        
+      } else {
+        // Excel export
+        const worksheet = XLSX.utils.json_to_sheet(data);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Inventory");
+  
+        const maxWidth = Object.keys(data[0]).reduce(
+          (max, key) => Math.max(max, key.length),
+          0
+        );
+        const colWidth = maxWidth + 2;
+  
+        worksheet["!cols"] = Object.keys(data[0]).map(() => ({
+          wch: colWidth,
+        }));
+  
+        const range = XLSX.utils.decode_range(worksheet["!ref"] || "A1");
+        for (let C = range.s.c; C <= range.e.c; ++C) {
+          const cell = XLSX.utils.encode_cell({ r: 0, c: C });
+          if (!worksheet[cell]) continue;
+          worksheet[cell].s = {
+            font: { bold: true, color: { rgb: "FFFFFF" } },
+            alignment: { horizontal: "center" },
+            fill: { fgColor: { rgb: "29568A" } },
+          };
+        }
+  
+        XLSX.writeFile(workbook, "eyeglass-inventory.xlsx");
+      }
+  
+      toast.success(`Exported successfully as ${type.toUpperCase()}`);
+    } catch (error) {
+      console.error("Export error:", error);
+      toast.error(`Failed to export data: ${error.message || error}`);
+    }
+  };
+
   return (
     <>
-      <div style={{ marginBottom: 16 }}>
-        <Button
-          type="primary"
-          onClick={handleBulkDelete}
-          disabled={!hasSelected}
-          loading={isFetching}
-        >
-          Delete
-        </Button>
-        <span style={{ marginLeft: 8 }}>
-          {hasSelected ? `Selected ${selectedRowKeys.length} items` : ""}
-        </span>
+      <div
+        style={{
+          marginBottom: 16,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+          {hasSelected && (
+            <>
+              <Button
+                type="primary"
+                onClick={handleBulkDelete}
+                loading={isFetching}
+                icon={<DeleteOutlined />}
+              >
+                Delete
+              </Button>
+              <span style={{ marginLeft: 8 }}>
+                Selected {selectedRowKeys.length} items
+              </span>
+            </>
+          )}
+        </div>
+
+        <div style={{ display: "flex", gap: 20 }}>
+          <Input.Search
+            placeholder="Search products..."
+            style={{ width: 200 }}
+            onSearch={handleSearch}
+            allowClear
+            onChange={(e) => {
+              if (!e.target.value) {
+                setSearchTerm("");
+              }
+            }}
+          />
+          <NavLink to="/add-eyeglass">
+            <Button type="primary" icon={<PlusOutlined />}>
+              Add Product
+            </Button>
+          </NavLink>
+          <Dropdown
+            menu={{
+              items: [
+                {
+                  key: "pdf",
+                  label: "Export as PDF",
+                  icon: <FilePdfOutlined />,
+                  onClick: () => handleExport("pdf"),
+                },
+                {
+                  key: "excel",
+                  label: "Export as Excel",
+                  icon: <FileExcelOutlined />,
+                  onClick: () => handleExport("excel"),
+                },
+              ],
+            }}
+          >
+            <Button icon={<DownloadOutlined />}>
+              Export <DownOutlined />
+            </Button>
+          </Dropdown>
+        </div>
       </div>
       <Table
         columns={columns}

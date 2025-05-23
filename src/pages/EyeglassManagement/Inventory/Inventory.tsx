@@ -305,14 +305,14 @@ const Inventory = () => {
           tableWidth: 'auto',
           columnStyles: {
             0: { cellWidth: 80 }, // Name
-            1: { cellWidth: 40 }, // Quantity
-            2: { cellWidth: 50 }, // Price
-            3: { cellWidth: 70 }, // Frame Material
-            4: { cellWidth: 70 }, // Frame Shapes
+            1: { cellWidth: 60 }, // Quantity
+            2: { cellWidth: 60 }, // Price
+            3: { cellWidth: 90 }, // Frame Material
+            4: { cellWidth: 90 }, // Frame Shapes
             5: { cellWidth: 50 }, // Color
-            6: { cellWidth: 60 }, // Frame Type
+            6: { cellWidth: 90 }, // Frame Type
             7: { cellWidth: 60 }, // Frame Size
-            8: { cellWidth: 60 }, // Lens Type
+            8: { cellWidth: 70 }, // Lens Type
             9: { cellWidth: 60 }, // Brand
             10: { cellWidth: 50 }, // Gender
           },

@@ -1,4 +1,5 @@
 import { Layout, Menu } from "antd";
+import { useLocation } from "react-router-dom";
 
 import { userPaths } from "../../routes/user.routes";
 import { sidebarItemsGenerator } from "../../utils/sidebarItemsGenerator";
@@ -6,10 +7,17 @@ import { sidebarItemsGenerator } from "../../utils/sidebarItemsGenerator";
 const { Sider } = Layout;
 
 const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
+  const location = useLocation();
   const sidebarItems = sidebarItemsGenerator(userPaths);
 
-  return (
+  // Get the current path without the leading slash
+  const currentPath = location.pathname.slice(1);
 
+  // Find the matching route to get the name for the selected key
+  const currentRoute = userPaths.find((route) => route.path === currentPath);
+  const selectedKey = currentRoute?.name || "Dashboard";
+
+  return (
     <Sider
       trigger={null}
       collapsible
@@ -50,7 +58,7 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
       <Menu
         theme="light"
         mode="inline"
-        defaultSelectedKeys={["dashboard"]}
+        selectedKeys={[selectedKey]}
         style={{ fontSize: "16px" }}
         items={sidebarItems}
       />

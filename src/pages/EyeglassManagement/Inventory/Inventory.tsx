@@ -363,7 +363,7 @@ const Inventory = () => {
       toast.success(`Exported successfully as ${type.toUpperCase()}`);
     } catch (error) {
       console.error("Export error:", error);
-      toast.error(`Failed to export data: ${error.message || error}`);
+      toast.error(`Failed to export data: ${error instanceof Error ? error.message : 'Unknown error occurred'}`);
     }
   };
 

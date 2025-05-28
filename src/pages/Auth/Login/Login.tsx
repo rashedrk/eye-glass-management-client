@@ -43,11 +43,11 @@ const Login = () => {
                 Admin
               </Typography.Title>
               <Typography.Text type="secondary">
-                Email: admin@demo.com
+                Email: admin@gmail.com
               </Typography.Text>
               <br />
               <Typography.Text type="secondary">
-                Password: test123
+                Password: 12345678
               </Typography.Text>
             </div>
             <Button
@@ -72,7 +72,7 @@ const Login = () => {
                 Seller
               </Typography.Title>
               <Typography.Text type="secondary">
-                Email: seller@demo.com
+                Email: seller@gmail.com
               </Typography.Text>
               <br />
               <Typography.Text type="secondary">
@@ -84,7 +84,7 @@ const Login = () => {
               style={{ backgroundColor: "#FE9F43" }}
               onClick={async () => {
                 await handleSubmit({
-                  email: "seller@demo.com",
+                  email: "seller@gmail.com",
                   password: "test123",
                 });
                 modal.destroy();

@@ -24,6 +24,7 @@ export const userPaths = [
     path: "add-eyeglass",
     element: <AddEyeglass />,
     icon: <PlusCircleOutlined style={{ fontSize: "16px" }}/>,
+    role: "admin"
   },
   {
     name: "Inventory",

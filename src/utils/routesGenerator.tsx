@@ -1,5 +1,5 @@
 import { TRoutes, TUserPath } from "../types";
-
+import RoleBasedRoute from "../components/layout/RoleBasedRoute";
 
 
 export const routeGenerator = (paths: TUserPath[]) => {
@@ -8,7 +8,11 @@ export const routeGenerator = (paths: TUserPath[]) => {
         if (item.path && item.element) {
             acc.push({
                 path: item.path,
-                element: item.element,
+                element: item.role ? (
+                    <RoleBasedRoute role={item.role}>
+                        {item.element}
+                    </RoleBasedRoute>
+                ) : item.element,
             });
         }
 
@@ -16,7 +20,11 @@ export const routeGenerator = (paths: TUserPath[]) => {
             item.children.forEach((child) => {
                 acc.push({
                     path: child.path!,
-                    element: child.element,
+                    element: child.role ? (
+                        <RoleBasedRoute role={child.role}>
+                            {child.element}
+                        </RoleBasedRoute>
+                    ) : child.element,
                 });
             });
         }

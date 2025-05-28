@@ -18,4 +18,5 @@ export type TUserPath = {
     element?: ReactNode;
     children?: TUserPath[];
     icon?: ReactNode;
+    role?:string;
 };

@@ -2,13 +2,14 @@ import { Layout, Menu } from "antd";
 import { useLocation } from "react-router-dom";
 
 import { userPaths } from "../../routes/user.routes";
-import { sidebarItemsGenerator } from "../../utils/sidebarItemsGenerator";
+import { useSidebarItemsGenerator } from "../../utils/sidebarItemsGenerator";
+
 
 const { Sider } = Layout;
 
 const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
   const location = useLocation();
-  const sidebarItems = sidebarItemsGenerator(userPaths);
+  const sidebarItems = useSidebarItemsGenerator(userPaths);
 
   // Get the current path without the leading slash
   const currentPath = location.pathname.slice(1);
